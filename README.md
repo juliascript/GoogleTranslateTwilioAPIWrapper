@@ -1,11 +1,11 @@
 # GoogleTranslateTwilioAPIWrapper 
 
-*Remember to update the code with your own API keys, IDs, and tokens from Google Cloud Platform and Twilio, as well as your Twilio phone number and the number you'd like to text to.*
+**Remember to update the code with your own API keys, IDs, and tokens from Google Cloud Platform and Twilio, as well as your Twilio phone number.**
 
 
 `translate` takes two arguments. The first argument is an array of strings that are to be translated into the language specified in the second argument. The default value for the language is Spanish. An array of translated strings is returned. 
 
-`sms` takes one argument, the string to send to the number which is specified in the function body. This should probably be edited in the future so we're not only texting one person. :P 
+`sms` takes two arguments. The first argument is the string to send. The second argument is the number to which the message will be sent. 
 
 And now a code sample: 
 
@@ -21,5 +21,7 @@ translatedTextArray = translate(array_of_messages)
 
 # For every element in the translatedTextArray, send it via sms. 
 for translatedText in translatedTextArray:
-	sms(translatedText)
+	sms(translatedText, 19998887777)
+	# Or, if you want to pass the string value of the number..
+	# sms(translatedText, "+19998887777")
 ```

@@ -9,17 +9,18 @@ from twilio.rest import TwilioRestClient
 # API Keyzz
 # -------------------------------------------------------
 # Google ----
-GOOGLE_API_KEY = "------------"
+GOOGLE_API_KEY = "-----REPLACE-------"
 # Twilio ----
-ACCOUNT_SID = "-------------"
-AUTH_TOKEN = "--------------"
+ACCOUNT_SID = "------REPLACE-------"
+AUTH_TOKEN = "-------REPLACE-------"
 
 # Translates all text elements of the array given as the first argument into the language given as the second argument
 def translate(input_text_array = [], language="es") :
 	# URL construction
 	url = "https://www.googleapis.com/language/translate/v2?key=" + GOOGLE_API_KEY + "&target=" + language
-	# Keeps connection live for translation of entire array
+	# Opens connection for web API calls
 	http = httplib2.Http()
+
 	array_of_translations = []
 	queryString = ""
 
@@ -38,6 +39,7 @@ def translate(input_text_array = [], language="es") :
 		try: 
 			# Translate string into Python dictionary, stored in variable body
 			body = json.loads(body)
+			# Iterate for length of input_text_array and access the translatedText key for each
 			for i in range(0, len(input_text_array)):
 				# Accesses the translatedText key within the body dictionary
 				translatedText = body["data"]["translations"][i]["translatedText"]
@@ -49,12 +51,16 @@ def translate(input_text_array = [], language="es") :
 	return array_of_translations
 			
 # Takes a message as an argument and sends a message to Kenny 
-def sms(message) :
+def sms(message, toNumber) :
+	# If toNumber is not a string, throw it into a string
+	if !(isinstance(toNumber, basestring)):
+		toNumber = "+" + toNumber
+
 	# Instantiate TwillioRestClient with ID and token 
 	client = TwilioRestClient(ACCOUNT_SID, AUTH_TOKEN)
 	try: 
 		# Calls the create method on client
-		client.messages.create(  to="----------",  from_="----------",  body=message)
+		client.messages.create(  to = toNumber,  from_ = "---REPLACE WITH YOUR TWILIO NUMBER---",  body=message)
 		# Give message receipt to terminal
 		print (message + " sent.")
 	except Exception as e:
