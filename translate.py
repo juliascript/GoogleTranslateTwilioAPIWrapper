@@ -48,7 +48,7 @@ def translate(input_text_array = [], language="es") :
 		except Exception as e:
 			print "There was a problem loading translation from Google."
 
-	return array_of_translations
+		return array_of_translations
 			
 # Takes a message as an argument and sends a message to the number passed in as the second argument
 def sms(message, toNumber) :
