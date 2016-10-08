@@ -59,10 +59,3 @@ def sms(message) :
 		print (message + " sent.")
 	except Exception as e:
 		print "There was a problem sending the message with Twilio. Please try again."
-
-
-
-array_of_messages = ["Reality is a construction of the senses", "Success is learning how to go from failure to failure without despair"]
-translatedTextArray = translate(array_of_messages)
-for translatedText in translatedTextArray:
-	sms(translatedText)
