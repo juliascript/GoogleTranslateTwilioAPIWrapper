@@ -29,7 +29,7 @@ def translate(input_text_array = [], language="es") :
 		input_text = urllib.quote(input_text, safe ='')
 		queryString = queryString + "&q=" + input_text
 		
-	# URL construction cont. to add text to be translated
+	# URL construction cont. -- to add text to be translated to end of url
 	url = url + queryString
 	# HTTP GET request, returns metadata in response, translation in body
 	response, body = http.request(url, "GET")
@@ -50,11 +50,11 @@ def translate(input_text_array = [], language="es") :
 
 	return array_of_translations
 			
-# Takes a message as an argument and sends a message to Kenny 
+# Takes a message as an argument and sends a message to the number passed in as the second argument
 def sms(message, toNumber) :
 	# If toNumber is not a string, throw it into a string
-	if !(isinstance(toNumber, basestring)):
-		toNumber = "+" + toNumber
+	if isinstance(toNumber, basestring) == 0:
+		toNumber = "+" + str(toNumber)
 
 	# Instantiate TwillioRestClient with ID and token 
 	client = TwilioRestClient(ACCOUNT_SID, AUTH_TOKEN)
